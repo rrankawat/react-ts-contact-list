@@ -16,7 +16,19 @@
       "id": 3,
       "firstName": "Wednesday",
       "lastName": "Admos",
-      "type": "PIET"
+      "type": "Boston University"
+    },
+    {
+      "firstName": "Billu",
+      "lastName": "Barbar",
+      "type": "RU",
+      "id": 4
+    },
+    {
+      "firstName": "Rama",
+      "lastName": "Shankar",
+      "type": "RTU",
+      "id": 5
     }
   ]
 }

@@ -5,7 +5,7 @@ import axios from 'axios'
 import ContactItem from './ContactItem'
 
 export interface Contact {
-  id: number
+  id?: number
   firstName: string
   lastName: string
   type: string
@@ -15,8 +15,10 @@ const Contacts = () => {
   const [contacts, setContacts] = useState<Contact[] | undefined>([])
 
   const getContacts = async () => {
-    const res = await axios.get(`http://localhost:5000/contacts`)
-    setContacts(res.data)
+    const res = await axios.get(
+      `http://localhost:5000/contacts?_sort=firstName`
+    )
+    setContacts(res?.data)
   }
 
   useEffect(() => {
