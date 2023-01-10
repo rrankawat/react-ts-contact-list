@@ -1,0 +1,22 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Tom",
+      "lastName": "Johnson",
+      "type": "DC"
+    },
+    {
+      "id": 2,
+      "firstName": "Marie",
+      "lastName": "Loop",
+      "type": "NY"
+    },
+    {
+      "id": 3,
+      "firstName": "Wednesday",
+      "lastName": "Admos",
+      "type": "PIET"
+    }
+  ]
+}
