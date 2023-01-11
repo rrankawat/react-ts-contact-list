@@ -19,16 +19,28 @@
       "type": "Boston University"
     },
     {
-      "firstName": "Billu",
-      "lastName": "Barbar",
-      "type": "RU",
-      "id": 4
-    },
-    {
       "firstName": "Rama",
       "lastName": "Shankar",
       "type": "RTU",
       "id": 5
+    },
+    {
+      "firstName": "Hina",
+      "lastName": "Sharma",
+      "type": "PIET",
+      "id": 6
+    },
+    {
+      "firstName": "Abdul",
+      "lastName": "Samad",
+      "type": "TVM",
+      "id": 7
+    },
+    {
+      "firstName": "Jeetu",
+      "lastName": "Khichi",
+      "type": "TVM",
+      "id": 8
     }
   ]
 }

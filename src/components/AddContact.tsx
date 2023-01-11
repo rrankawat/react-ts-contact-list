@@ -1,16 +1,28 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { Contact } from './ContactList'
 
 const AddContact = () => {
   const history = useNavigate()
+  const { id } = useParams()
   const [contact, setContact] = useState<Contact>({
     firstName: '',
     lastName: '',
     type: '',
   })
+
+  const getContact = async (id: string) => {
+    const res = await axios.get(`http://localhost:5000/contacts/${id}`)
+    setContact(res?.data)
+  }
+
+  useEffect(() => {
+    if (id) {
+      getContact(id)
+    }
+  }, [id])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContact((preState) => ({ ...preState, [e.target.name]: e.target.value }))
@@ -19,6 +31,10 @@ const AddContact = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    const url = id
+      ? `http://localhost:5000/contacts/${id}`
+      : `http://localhost:5000/contacts`
+
     const config = {
       headers: {
         'Contact-Type': 'application/json',
@@ -26,15 +42,20 @@ const AddContact = () => {
     }
 
     if (contact.firstName && contact.lastName && contact.type) {
-      const res = await axios.post(
-        `http://localhost:5000/contacts`,
-        contact,
-        config
-      )
+      const res = id
+        ? await axios.put(url, contact, config)
+        : await axios.post(url, contact, config)
 
-      if (res?.status === 201) {
+      if (res?.status === 201 || res?.status === 200) {
         history('/')
       }
+    }
+  }
+
+  const onDelete = async () => {
+    if (id) {
+      await axios.delete(`http://localhost:5000/contacts/${id}`)
+      history('/')
     }
   }
 
@@ -45,9 +66,16 @@ const AddContact = () => {
           Add <span className="text-primary-emphasis">New</span>
         </h2>
 
-        <Link to="/" className="btn btn-danger d-block">
-          Back
-        </Link>
+        <div className="d-flex">
+          <Link to="/" className="btn btn-secondary d-block">
+            Back
+          </Link>
+          {id && (
+            <button className="btn btn-danger mx-3" onClick={onDelete}>
+              <i className="fa-solid fa-trash"></i>
+            </button>
+          )}
+        </div>
       </div>
 
       <form onSubmit={onSubmit}>
@@ -82,7 +110,11 @@ const AddContact = () => {
           />
         </div>
         <div className="mb-3">
-          <input type="submit" value="Submit" className="btn btn-success" />
+          <input
+            type="submit"
+            value={id ? 'Update' : 'Submit'}
+            className="btn btn-success"
+          />
         </div>
       </form>
     </>
