@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { useTypedSelector, useTypedDispatch } from '../redux/store'
+import { allContact } from '../redux/contacts/actions/allContactAction'
 
 import ContactItem from './ContactItem'
 
@@ -12,18 +13,12 @@ export interface Contact {
 }
 
 const Contacts = () => {
-  const [contacts, setContacts] = useState<Contact[] | undefined>([])
-
-  const getContacts = async () => {
-    const res = await axios.get(
-      `http://localhost:5000/contacts?_sort=firstName`
-    )
-    setContacts(res?.data)
-  }
+  const dispatch = useTypedDispatch()
+  const { data, error, loading } = useTypedSelector((state) => state.allContact)
 
   useEffect(() => {
-    getContacts()
-  }, [])
+    dispatch(allContact())
+  }, [dispatch])
 
   return (
     <>
@@ -38,7 +33,7 @@ const Contacts = () => {
       </div>
 
       <hr />
-      {contacts?.map((contact) => (
+      {data?.map((contact) => (
         <ContactItem key={contact.id} contact={contact} />
       ))}
     </>

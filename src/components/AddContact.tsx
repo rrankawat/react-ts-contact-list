@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 import { Contact } from './ContactList'
 
@@ -46,15 +47,20 @@ const AddContact = () => {
         ? await axios.put(url, contact, config)
         : await axios.post(url, contact, config)
 
-      if (res?.status === 201 || res?.status === 200) {
-        history('/')
+      if (res?.status === 201) {
+        toast.success('Contact created')
+      } else if (res?.status === 200) {
+        toast.success('Contact updated')
       }
+      history('/')
     }
   }
 
   const onDelete = async () => {
     if (id) {
       await axios.delete(`http://localhost:5000/contacts/${id}`)
+
+      toast.success('Contact deleted')
       history('/')
     }
   }
