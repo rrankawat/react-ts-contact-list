@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useTypedSelector, useTypedDispatch } from '../redux/store'
-import { allContact } from '../redux/contacts/actions/allContactAction'
+import { useTypedSelector, useTypedDispatch } from '../../redux/store'
+import { allContact } from '../../redux/contacts/actions/allContactAction'
+import { toast } from 'react-toastify'
 
 import ContactItem from './ContactItem'
+import Spinner from '../spinner/Spinner'
 
-export interface Contact {
+export interface IContact {
   id?: number
   firstName: string
   lastName: string
@@ -36,6 +38,8 @@ const Contacts = () => {
       {data?.map((contact) => (
         <ContactItem key={contact.id} contact={contact} />
       ))}
+      {error && toast.error(error)}
+      {loading && <Spinner />}
     </>
   )
 }

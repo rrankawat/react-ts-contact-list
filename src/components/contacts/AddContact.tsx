@@ -3,12 +3,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-import { Contact } from './ContactList'
+import { IContact } from './ContactList'
 
 const AddContact = () => {
   const history = useNavigate()
   const { id } = useParams()
-  const [contact, setContact] = useState<Contact>({
+  const [contact, setContact] = useState<IContact>({
     firstName: '',
     lastName: '',
     type: '',

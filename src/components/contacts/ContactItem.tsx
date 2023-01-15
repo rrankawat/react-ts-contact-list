@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Contact } from './ContactList'
+import { IContact } from './ContactList'
 
 interface CIProps {
-  contact: Contact
+  contact: IContact
 }
 
 const ContactItem: React.FC<CIProps> = ({ contact }) => {

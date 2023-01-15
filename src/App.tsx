@@ -3,8 +3,8 @@ import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 
-import ContactList from './components/ContactList'
-import AddContact from './components/AddContact'
+import ContactList from './components/contacts/ContactList'
+import AddContact from './components/contacts/AddContact'
 
 const App = () => {
   return (
